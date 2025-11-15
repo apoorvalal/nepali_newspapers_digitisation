@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# Project specific - large data directories
+ocr_output/
+newspapers_archive/
+old_nb/
+
+# Data files (but keep documentation examples)
+*.pdf
+*.json
+!planning/*.json
+*.txt
+!benchmarking/*.txt
+
+# Jupyter
+*.ipynb_checkpoints/
+*.ipynb
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Model cache
+.cache/
