@@ -10,6 +10,7 @@ Large-scale OCR processing of historical Nepali newspaper archive (2007-2017) us
 - Supports 90+ languages including Nepali (Devanagari script)
 - High accuracy on complex scripts and mixed-language documents
 - GPU-accelerated with batch processing
+- **Reading order detection** for multi-column newspaper layouts
 
 **Hardware**: NVIDIA RTX 5070 (12 GB VRAM, Blackwell architecture, CUDA 12.8)
 
@@ -18,11 +19,14 @@ Large-scale OCR processing of historical Nepali newspaper archive (2007-2017) us
 ```
 nepali_newspapers/
 ├── benchmarking/          # Performance testing and optimization scripts
-│   ├── test_single_page.py       # Quick single-page validation
-│   ├── test_batch_simple.py      # Initial batch optimization (1-8 pages)
-│   ├── test_large_batches.py     # Large batch optimization (12-32 pages)
-│   ├── test_batch_optimization.py # Detailed batch tuning
-│   └── test_surya_ocr.py         # Full PDF processing test
+│   ├── test_single_page.py           # Quick single-page validation
+│   ├── test_batch_simple.py          # Initial batch optimization (1-8 pages)
+│   ├── test_large_batches.py         # Large batch optimization (12-32 pages)
+│   ├── test_extreme_batches.py       # Extreme batch testing (48-128 pages)
+│   ├── test_reading_order.py         # Reading order detection test
+│   ├── test_reading_order_nepali.py  # Reading order for Devanagari
+│   ├── visualize_bboxes.py           # OCR bbox visualization
+│   └── visualize_layout_regions.py   # Layout region visualization
 │
 ├── code/                  # Production processing code
 │   ├── process_newspaper_archive.py  # Main production OCR script
@@ -144,11 +148,14 @@ python benchmarking/test_extreme_batches.py
 - [x] **Phase 3**: Batch optimization (1-32 pages)
 - [x] **Phase 4**: Extreme batch testing (48-128 pages)
 - [x] **Phase 5**: Production script development
-- [ ] **Phase 6**: Pilot run (single publication)
-- [ ] **Phase 7**: Major publications processing (6 pubs, 8 days)
-- [ ] **Phase 8**: Full archive processing (optional)
+- [x] **Phase 6**: Reading order detection implementation
+- [x] **Phase 7**: Multi-column layout handling
+- [x] **Phase 8**: Repository setup and documentation
+- [🔄] **Phase 9**: The Kathmandu Post processing (4,321 PDFs, ~2 days)
+- [ ] **Phase 10**: Major publications processing (remaining 5 pubs)
+- [ ] **Phase 11**: Full archive processing (optional)
 
-**Next**: Run pilot on one publication to validate production pipeline.
+**Current**: Processing The Kathmandu Post archive (2007-2017).
 
 See [planning/PROJECT_PLAN.md](planning/PROJECT_PLAN.md) for detailed roadmap.
 
@@ -164,6 +171,13 @@ See [planning/PROJECT_PLAN.md](planning/PROJECT_PLAN.md) for detailed roadmap.
 - CUDA compute capability: 12.0 (Blackwell)
 - Memory allocator: expandable_segments enabled
 - Batch processing: Detection (12), Recognition (256)
+
+**Reading Order Detection**:
+- Uses Surya's LayoutPredictor to detect logical regions (Text, SectionHeader, Picture, etc.)
+- Assigns reading order position to each region
+- Sorts OCR text by region position for coherent article extraction
+- Handles multi-column newspaper layouts automatically
+- Works with both English and Nepali (Devanagari) scripts
 
 ## Data
 
