@@ -1,6 +1,6 @@
 # Nepali Newspapers OCR Project
 
-Large-scale OCR processing of historical Nepali newspaper archive (2007-2017) using Surya OCR on RTX 5070.
+Large-scale OCR processing of historical Nepali newspaper archive (2007-2017) using Surya OCR on RTX 5070 consumer GPU plugged into a laptop. Downstream use in embedding and multilingual industrial-organization economics questions. Basic structure of repository should generalize to other large-scale OCR projects involving complex scripts and multi-column layouts like newspapers.
 
 ## Project Overview
 
@@ -11,6 +11,12 @@ Large-scale OCR processing of historical Nepali newspaper archive (2007-2017) us
 - High accuracy on complex scripts and mixed-language documents
 - GPU-accelerated with batch processing
 - **Reading order detection** for multi-column newspaper layouts
+
+`surya` has nice visualizations for OCR bounding boxes and layout regions, which then feeds into reading order detection to extract coherent articles.
+
+![](benchmarking/eng.png)
+
+![](benchmarking/nepali.png)
 
 **Hardware**: NVIDIA RTX 5070 (12 GB VRAM, Blackwell architecture, CUDA 12.8)
 
